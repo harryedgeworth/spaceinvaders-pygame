@@ -10,7 +10,7 @@ class MenuState(State):
         self.width = pygame.display.get_surface().get_width()
         self.height = pygame.display.get_surface().get_height()
         self.font = pygame.font.Font('freesansbold.ttf', 32)
-        self.text = self.font.render('Menu', True, (255, 255, 255))
+        self.text = self.font.render('Space Invaders', True, (255, 255, 255))
         self.textRect = self.text.get_rect()
         self.textRect.center = (self.width // 2, self.height // 2)
 

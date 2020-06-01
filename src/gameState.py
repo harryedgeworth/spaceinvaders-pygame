@@ -10,7 +10,7 @@ class GameState(State):
         self.width = pygame.display.get_surface().get_width()
         self.height = pygame.display.get_surface().get_height()
         self.font = pygame.font.Font('freesansbold.ttf', 32)
-        self.text = self.font.render('Game', True, (0, 0, 0))
+        self.text = self.font.render('Game state here', True, (0, 0, 0))
         self.textRect = self.text.get_rect()
         self.textRect.center = (self.width // 2, self.height // 2)
 
