@@ -1,4 +1,6 @@
 from src.state import State
+from src.player import Player 
+from src.enemy import Enemy
 
 import pygame
 import sys
@@ -19,14 +21,38 @@ class GameState(State):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     self.stateManager.change_state('menu')
+                if event.key == pygame.K_LEFT:
+                    self.player.speed -= 7
+                if event.key == pygame.K_RIGHT:
+                    self.player.speed += 7
+
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_LEFT:
+                    self.player.speed += 7
+                if event.key == pygame.K_RIGHT:
+                    self.player.speed -= 7
 
     def tick(self, clock):
-        pass
+        self.all_sprites.update()
+
+        if self.enemies[-1].rect.right >= self.width or self.enemies[0].rect.left <= 0:
+            for i in self.enemies:
+                i.speed *= -1
+                i.rect.y += 25
 
     def blit(self, surface):
         surface.fill((255, 255, 255))
-        surface.blit(self.text, self.textRect)
+        self.all_sprites.draw(surface)
 
     def join(self, old_state = None):
-        pass
-    
+        if old_state == 'menu':
+            self.player = Player(self.width // 2, self.height - 20)
+            
+            x = 50 
+            self.enemies = []
+            for i in range(10):
+                self.enemies.append(Enemy(x, 100))
+                x += 55
+
+            self.all_sprites = pygame.sprite.Group()
+            self.all_sprites.add(self.player, self.enemies)
