@@ -10,7 +10,7 @@ class MenuState(State):
         self.width = pygame.display.get_surface().get_width()
         self.height = pygame.display.get_surface().get_height()
         self.font = pygame.font.Font('freesansbold.ttf', 32)
-        self.text = self.font.render('Space Invaders', True, (255, 255, 255))
+        self.text = self.font.render('Space Invaders', True, (0, 0, 0))
         self.textRect = self.text.get_rect()
         self.textRect.center = (self.width // 2, self.height // 2)
 
@@ -26,5 +26,5 @@ class MenuState(State):
         pass
 
     def blit(self, surface):
-        surface.fill((0, 0, 0))
+        surface.fill((255, 255, 255))
         surface.blit(self.text, self.textRect)

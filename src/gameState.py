@@ -11,10 +11,6 @@ class GameState(State):
         self.AM = self.stateManager.AM
         self.width = pygame.display.get_surface().get_width()
         self.height = pygame.display.get_surface().get_height()
-        self.font = pygame.font.Font('freesansbold.ttf', 32)
-        self.text = self.font.render('Game state here', True, (0, 0, 0))
-        self.textRect = self.text.get_rect()
-        self.textRect.center = (self.width // 2, self.height // 2)
 
     def handleEvents(self, events):
         for event in events:
@@ -41,7 +37,7 @@ class GameState(State):
                 i.rect.y += 25
 
     def blit(self, surface):
-        surface.fill((255, 255, 255))
+        surface.fill((0, 0, 0))
         self.all_sprites.draw(surface)
 
     def join(self, old_state = None):
