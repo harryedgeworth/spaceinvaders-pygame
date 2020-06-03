@@ -32,11 +32,9 @@ class GameState(State):
 
     def tick(self, clock):
         self.all_sprites.update()
-        Enemy.movement(self.enemies1, self.width)
-        Enemy.movement(self.enemies2, self.width)
-        Enemy.movement(self.enemies3, self.width)
-        Enemy.movement(self.enemies4, self.width)
-        Enemy.movement(self.enemies5, self.width)
+
+        for enemies in self.enemies:
+            Enemy.movement(enemies, self.width)
 
     def blit(self, surface):
         surface.fill((0, 0, 0))
@@ -45,17 +43,18 @@ class GameState(State):
     def join(self, old_state = None):
         if old_state == 'menu':
             self.player = Player(self.width // 2, self.height - 20)
-            self.enemies1 = []
-            self.enemies2 = []
-            self.enemies3 = []
-            self.enemies4 = []
-            self.enemies5 = []
+            self.enemies = [
+                [],
+                [],
+                [],
+                [],
+            ]
+
+            x = 100
             
-            Enemy.spawnEnemyRow(self.enemies1, 100)
-            Enemy.spawnEnemyRow(self.enemies2, 150)
-            Enemy.spawnEnemyRow(self.enemies3, 200)
-            Enemy.spawnEnemyRow(self.enemies4, 250)
-            Enemy.spawnEnemyRow(self.enemies5, 300)
-            
+            for enemies in self.enemies:
+                Enemy.spawnEnemyRow(enemies, x)
+                x += 50
+
             self.all_sprites = pygame.sprite.Group()
-            self.all_sprites.add(self.player, self.enemies1, self.enemies2, self.enemies3, self.enemies4, self.enemies5)
+            self.all_sprites.add(self.player, self.enemies)
