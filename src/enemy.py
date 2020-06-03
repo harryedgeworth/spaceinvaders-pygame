@@ -13,3 +13,9 @@ class Enemy(pygame.sprite.Sprite):
 
     def update(self):
         self.rect.x += self.speed
+
+    def movement(enemyGroup):
+        if enemyGroup[-1].rect.right >= 800 or enemyGroup[0].rect.left <= 0:
+            for i in enemyGroup:
+                i.speed *= -1
+                i.rect.y += 25
